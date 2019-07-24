@@ -9,7 +9,7 @@ const AdditionalFeature = props => {
     <li>
       {/* Add an onClick that will let you add a feature to your car */}
       <button onClick={e => add(e)} className="button">
-        Add Add
+        Add
       </button>
       {props.feature.name} (+{props.feature.price})
     </li>
