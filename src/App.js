@@ -1,55 +1,47 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
 import { addCarFeature, removeCarFeature } from "./store/actions";
-import Header from './components/Header';
-import AddedFeatures from './components/AddedFeatures';
-import AdditionalFeatures from './components/AdditionalFeatures';
-import Total from './components/Total';
+import Header from "./components/Header";
+import AddedFeatures from "./components/AddedFeatures";
+import AdditionalFeatures from "./components/AdditionalFeatures";
+import Total from "./components/Total";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const App = props => {
 
-  removeFeature = item => {
+  const removeCarFeature = item => {
     // dispatch an action here to remove an item
+    props.removeCarFeature(item);
   };
 
-  buyItem = item => {
+  const buyItem = item => {
     // dipsatch an action here to add an item
+    props.addCarFeature(item);
   };
 
-  render() {
-    console.log(this.props.car);
-    return (
-      <div className="boxes">
-        <div className="box">
-          <Header car={this.props.car} />
-          <AddedFeatures
-            car={this.props.car}
-            removeFeature={this.removeFeature}
-          />
-        </div>
-        <div className="box">
-          <AdditionalFeatures store={this.props.store} buyItem={this.buyItem} />
-          <Total
-            car={this.props.car}
-            additionalPrice={this.props.additionalPrice}
-          />
-        </div>
+  return (
+    <div className="boxes">
+      <div className="box">
+        <Header car={props.car} />
+        <AddedFeatures car={props.car} removeCarFeature={removeCarFeature} />
       </div>
-    );
-  }
+      <div className="box">
+        <AdditionalFeatures store={props.store} buyItem={buyItem} />
+        <Total car={props.car} additionalPrice={props.additionalPrice} />
+      </div>
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  additionalPrice: state.additionalPrice,
-  car: state.car,
-  store: state.store
-})
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    additionalPrice: state.additionalPrice,
+    car: state.car,
+    store: state.store
+  };
+}
 
 export default connect(
   mapStateToProps,
-  {}
+  { addCarFeature, removeCarFeature }
 )(App);
