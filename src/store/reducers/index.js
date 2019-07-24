@@ -24,10 +24,12 @@ export const carReducer = (state = initialState, action) => {
       console.log(state);
       return {
         ...state,
+        additionalPrice: state.additionalPrice + action.payload.price,
         car: {
           ...state.car,
           features: [...state.car.features, action.payload]
-        }
+        },
+        store: state.store.filter(feature => feature.id !== action.payload.id)
       };
     case REMOVE_FEATURE:
       return {
@@ -38,8 +40,8 @@ export const carReducer = (state = initialState, action) => {
           features: state.car.features.filter(
             feature => feature.id !== action.payload.id
           )
-        },
-        store: [...state.store, action.payload]
+        }
+        // store: [...state.store, action.payload]
       };
     default:
       return state;
