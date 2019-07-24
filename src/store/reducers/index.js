@@ -41,7 +41,6 @@ export const carReducer = (state = initialState, action) => {
             feature => feature.id !== action.payload.id
           )
         }
-        // store: [...state.store, action.payload]
       };
     default:
       return state;
