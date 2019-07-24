@@ -1,5 +1,3 @@
-import { ADD_FEATURE } from "../actions";
-
 const initialState = {
   additionalPrice: 0,
   car: {
